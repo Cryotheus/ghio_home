@@ -3,7 +3,11 @@
 	"description": "ghio_home",
 	"devDependencies": {
 		"nodemon": "^3.0.1",
-		"sass": "^1.69.3"
+		"sass": "^1.69.3",
+		"ts-loader": "^9.5.0",
+		"typescript": "^5.2.2",
+		"webpack": "^5.89.0",
+		"webpack-cli": "^5.1.4"
 	},
 	"keywords": [],
 	"license": "MIT",
