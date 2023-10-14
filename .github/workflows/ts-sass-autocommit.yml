@@ -1,0 +1,16 @@
+name: "Build & commit: TypeScript and Sass"
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  ts_sass_build_commit_job:
+    runs-on: ubuntu-22.04
+    name: "Build & commit: TypeScript and Sass"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clear destination
+        run: echo /$target-directory/*
