@@ -1,0 +1,18 @@
+{
+	"author": "Cryothum",
+	"description": "ghio_home",
+	"devDependencies": {
+		"nodemon": "^3.0.1",
+		"sass": "^1.69.3"
+	},
+	"keywords": [],
+	"license": "MIT",
+	"main": "index.js",
+	"name": "ghio_home",
+	"private": true,
+	"scripts": {
+		"build": "npx webpack && npx sass src:dist --style=compressed",
+		"watch": "npx nodemon --watch src -e ts,sass -x \"npm run build\""
+	},
+	"version": "1.0.0"
+}
