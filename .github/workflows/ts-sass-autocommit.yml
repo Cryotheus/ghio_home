@@ -1,11 +1,18 @@
 name: "Build & commit: TypeScript and Sass"
 
+#create a PAT with permissions to the target repo
+#and put it in the TSSASSAC_TARGET_TOKEN secret
+
 on:
   push:
     branches: [ "main" ]
 
+#configure these how you like them
 env:
+  #the target directory inside the repo to put the built files
+  #cannot be empty or the root of the repo
   TSSASSAC_TARGET_DIR: home
+  #the repo we are pushing the built files to
   TSSASSAC_TARGET_REPO: Cryotheus/cryotheus.github.io
 
 jobs:
@@ -49,6 +56,7 @@ jobs:
           date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
+          git config remote.origin.url https://${{secrets.TSSASSAC_TARGET_TOKEN}}@github.com/${{env.TSSASSAC_TARGET_REPO}}.git
           git add ${{env.TSSASSAC_TARGET_DIR}}/*
           git commit -m "generated"
           git push
