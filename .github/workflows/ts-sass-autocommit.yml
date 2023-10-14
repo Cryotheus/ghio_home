@@ -4,6 +4,10 @@ on:
   push:
     branches: [ "main" ]
 
+env:
+  TSSASSAC_TARGET_DIR: home
+  TSSASSAC_TARGET_REPO: Cryotheus/cryotheus.github.io
+
 jobs:
   ts_sass_build_commit_job:
     runs-on: ubuntu-22.04
@@ -12,5 +16,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
+      # build with node, then take the dist folder and upload into target repo
+
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{env.TSSASSAC_TARGET_REPO}}
+
       - name: Clear destination
         run: ls
+
+      - name: E1
+        run: echo GITHUB_WORKSPACE $GITHUB_WORKSPACE
+
+      - name: LS1
+        run: ls $GITHUB_WORKSPACE
+
+      - name: E2
+        run: echo github.workspace ${{github.workspace}}
+
+      - name: LS2
+        run: ls ${{github.workspace}}
