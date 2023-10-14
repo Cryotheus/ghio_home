@@ -13,4 +13,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Clear destination
-        run: echo /$target-directory/*
+        run: ls
