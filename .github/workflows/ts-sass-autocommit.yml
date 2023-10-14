@@ -14,28 +14,41 @@ jobs:
     name: "Build & commit: TypeScript and Sass"
 
     steps:
-      - uses: actions/checkout@v4
-
-      # - uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 18
-      # build with node, then take the dist folder and upload into target repo
-
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
+          path: this_repo
+          
+      # build with node, then take the dist folder and upload into target repo
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Run build script
+        working-directory: ${{github.workspace}}/this_repo
+        run: |
+          npm ci
+          npm run build
+
+      - name: Checkout target repo
+        uses: actions/checkout@v4
+        with:
+          path: target_repo
           repository: ${{env.TSSASSAC_TARGET_REPO}}
 
-      - name: Clear destination
-        run: ls
+      - name: Setup files for commit
+        working-directory: ${{github.workspace}}
+        run: |
+          mkdir -p target_repo/${{env.TSSASSAC_TARGET_DIR}}
+          rm -rf target_repo/${{env.TSSASSAC_TARGET_DIR}}/*
+          mv this_repo/dist/* target_repo/${{env.TSSASSAC_TARGET_DIR}}/
 
-      - name: E1
-        run: echo GITHUB_WORKSPACE $GITHUB_WORKSPACE
-
-      - name: LS1
-        run: ls $GITHUB_WORKSPACE
-
-      - name: E2
-        run: echo github.workspace ${{github.workspace}}
-
-      - name: LS2
-        run: ls ${{github.workspace}}
+      - name: Push the commit
+        working-directory: ${{github.workspace}}/target_repo
+        run: |
+          date > generated.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add ${{env.TSSASSAC_TARGET_DIR}}/*
+          git commit -m "generated"
+          git push
