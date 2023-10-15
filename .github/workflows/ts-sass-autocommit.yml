@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-22.04
     name: "Build & commit: TypeScript and Sass"
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -54,8 +57,9 @@ jobs:
         working-directory: ${{github.workspace}}/target_repo
         run: |
           date > generated.txt
-          git config --global user.name '${{secrets.TSSASSAC_TARGET_USERNAME}}'
-          git config --global user.email '${{secrets.TSSASSAC_TARGET_USEREMAIL}}'
+          git config --unset-all http.https://github.com/.extraheader
+          git config user.name "${{secrets.TSSASSAC_TARGET_USERNAME}}"
+          git config user.email "${{secrets.TSSASSAC_TARGET_USEREMAIL}}"
           git remote set-url origin https://${{secrets.TSSASSAC_TARGET_TOKEN}}@github.com/${{env.TSSASSAC_TARGET_REPO}}.git
           git add ${{env.TSSASSAC_TARGET_DIR}}/*
           git commit -am "generated"
