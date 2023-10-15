@@ -54,8 +54,8 @@ jobs:
         working-directory: ${{github.workspace}}/target_repo
         run: |
           date > generated.txt
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name ${{secrets.TSSASSAC_TARGET_USERNAME}}
+          git config user.email ${{secrets.TSSASSAC_TARGET_USEREMAIL}}
           git config remote.origin.url https://${{secrets.TSSASSAC_TARGET_TOKEN}}@github.com/${{env.TSSASSAC_TARGET_REPO}}.git
           git add ${{env.TSSASSAC_TARGET_DIR}}/*
           git commit -m "generated"
