@@ -1,1 +1,11 @@
-console.log("hello world, from home page's index.ts!");
+import * as el from "./simple_html";
+
+function buildCards() {
+	const cardsDiv = el.get<HTMLDivElement>("cards");
+
+	console.log(cardsDiv);
+}
+
+window.addEventListener('load', _ => {
+	buildCards();
+});
