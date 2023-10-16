@@ -61,6 +61,6 @@ jobs:
           git config user.email github-actions@github.com
           git remote set-url origin https://${{secrets.TSSASSAC_TARGET_TOKEN}}@github.com/${{env.TSSASSAC_TARGET_REPO}}.git
           git add ${{env.TSSASSAC_TARGET_DIR}}/*
-          git remove ${{env.TSSASSAC_TARGET_DIR}}/*.map
+          git reset ${{env.TSSASSAC_TARGET_DIR}}/*.map
           git commit -am "(Automated) '${{env.TSSASSAC_TARGET_DIR}}' pages update #${{github.run_number}}"
           git push
