@@ -7,11 +7,20 @@ let config = {
 
 	module: {
 		rules: [
-			{ //webpack loader for typescript modules/imports
+			{ //typescript loader for modules/imports
 				test: /\.tsx?$/,
 				use: "ts-loader",
 				exclude: /node_modules/,
 			},
+
+			{ //sass loader
+				test: /\.s[ac]ss$/i,
+				use: [
+					"style-loader",
+					"css-loader",
+					"sass-loader"
+				]
+			}
 		],
 	},
 

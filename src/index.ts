@@ -1,9 +1,15 @@
 import * as el from "./simple_html";
+import "./style.sass";
+
+const cardInfo: [string, string, string][] = [
+	["icon", "header", "description"],
+	["", "Games", ""]
+];
 
 function buildCards() {
 	const cardsDiv = el.get<HTMLDivElement>("cards");
 
-	console.log(cardsDiv);
+	//el.append(cardsDiv, "div");
 }
 
 window.addEventListener('load', _ => {

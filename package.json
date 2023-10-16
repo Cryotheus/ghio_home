@@ -3,8 +3,11 @@
 	"description": "ghio_home",
 	"devDependencies": {
 		"concurrently": "^8.2.1",
+		"css-loader": "^6.8.1",
 		"http-server": "^14.1.1",
 		"sass": "^1.69.3",
+		"sass-loader": "^13.3.2",
+		"style-loader": "^3.3.3",
 		"ts-loader": "^9.5.0",
 		"typescript": "^5.2.2",
 		"webpack": "^5.89.0",
@@ -17,8 +20,7 @@
 	"private": true,
 	"scripts": {
 		"build": "npx webpack & npx sass src:dist --style=compressed",
-		"start": "npx concurrently \"npm:watch-*\" --prefix-colors bgMagenta,bgBlue,bgGreen",
-		"watch-sass": "npx sass --watch src:dist",
+		"start": "npx concurrently \"npm:watch-*\" --prefix-colors bgBlue,bgGreen",
 		"watch-serve": "npx http-server dist",
 		"watch-webpack": "npx webpack --watch"
 	},
